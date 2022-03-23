@@ -1,13 +1,15 @@
 %lang starknet
 %builtins pedersen range_check
 
+from starkware.cairo.common.alloc import alloc
+from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.starknet.common.messages import send_message_to_l1
 
 ####################
 # STORAGE VARIABLES
 ####################
 @storage_var
-func l1_address() -> (count: felt):
+func l1_address() -> (addr: felt):
 end
 
 
@@ -15,8 +17,8 @@ end
 # CONSTRUCTOR
 ####################
 @constructor
-func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(address: felt):
-    l1_address.write(address)
+func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(addr: felt):
+    l1_address.write(addr)
 
     return ()
 end
