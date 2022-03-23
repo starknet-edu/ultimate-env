@@ -1,0 +1,10 @@
+{
+    "type": "DEPLOY",
+    "contract_address_salt": "0xdeadbeef",
+    "constructor_calldata": [],
+    "contract_definition": {
+        "abi": [],
+        "entry_points_by_type": {},
+        "program": ""
+    }
+}
