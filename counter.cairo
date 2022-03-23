@@ -7,7 +7,6 @@ from starkware.cairo.common.math import assert_not_zero
 ####################
 # STORAGE VARIABLES
 ####################
-
 @storage_var
 func counter() -> (count: felt):
 end

@@ -2,3 +2,4 @@
 *.gz*
 *abi*
 *compiled*
+tmp/
