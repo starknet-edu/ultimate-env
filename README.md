@@ -4,7 +4,7 @@ Companion repository for - https://medium.com/starknet-edu/the-ultimate-starknet
 ### StarkNet CLI Cheatsheet
 | Command        | Description           |
 | ------------- |:-------------:|
-| starknet-compile *.cairo* --output **_compiled.json** --abi *_abi.json* | compile starknet contract with abi specification |
+| starknet-compile *.cairo* --output *_compiled.json* --abi *_abi.json* | compile starknet contract with abi specification |
 | starknet deploy --contract *_compiled.json* | deploy compiled starknet contract |
 | starknet deploy --contract *_compiled.json* --gateway_url *U* | deploy compiled starknet contract with custom gateway |
 | starknet deploy_account | deploy default account |
