@@ -4,24 +4,22 @@ from starkware.cairo.common.cairo_builtins import HashBuiltin, SignatureBuiltin
 from starkware.cairo.common.math import assert_not_zero
 from starkware.starknet.common.syscalls import get_tx_info, get_caller_address
 
-from openzeppelin.account.IAccountSig import IAccount
-
 ####################
 # STORAGE VARIABLES
 ####################
 @storage_var
-func counter() -> (count: felt):
+func counter() -> (count : felt):
 end
 
 @storage_var
-func rand() -> (val: felt):
+func rand() -> (val : felt):
 end
 
 ####################
 # CONSTRUCTOR
 ####################
 @constructor
-func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}():
+func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}():
     counter.write(0)
 
     return ()
@@ -31,46 +29,47 @@ end
 # GETTERS FUNCTION
 ####################
 @view
-func get_count{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (count: felt):
+func get_count{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    count : felt
+):
     let (count) = counter.read()
 
     return (count)
 end
 
 @view
-func get_rand{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (val: felt):
+func get_rand{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (val : felt):
     let (val) = rand.read()
 
     return (val)
 end
 
-
 ####################
 # EXTERNAL FUNCTIONS
 ####################
 @external
-func set_rand{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr, ecdsa_ptr: SignatureBuiltin*}(val: felt):
+func set_rand{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(val : felt):
     rand.write(val)
 
     return ()
 end
 
 @external
-func set_rand_signed{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(val: felt):
+func set_rand_signed{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(val : felt):
     let (caller) = get_caller_address()
     let (tx_info) = get_tx_info()
 
     assert_not_zero(tx_info.signature_len)
 
-    IAccount.is_valid_signature(contract_address=caller, hash=tx_info.transaction_hash, signature_len=tx_info.signature_len, signature=tx_info.signature)
-
     rand.write(val)
 
     return ()
 end
 
 @external
-func increment{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (count: felt):
+func increment{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    count : felt
+):
     let (count) = counter.read()
     counter.write(count + 1)
 
@@ -80,10 +79,12 @@ func increment{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
 end
 
 @external
-func decrement{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (count: felt):
+func decrement{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+    count : felt
+):
     let (count) = counter.read()
     assert_not_zero(count)
-    
+
     counter.write(count - 1)
 
     let (new_count) = counter.read()
